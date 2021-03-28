@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private void blinkText(){
         final Handler handler = new Handler();
         new Thread(() -> {
-            int timeToBlink = 500;    //in ms
+            int timeToBlink = 250;    //in ms
             try{
                 Thread.sleep(timeToBlink);
 
