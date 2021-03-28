@@ -14,17 +14,18 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     static ArrayList<Integer> values = new ArrayList<>();
-    static int animationCounter =0;
-    static int clickCounter = 0;
+    static int animationCounter;
+    static int clickCounter;
     static boolean dark = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        resetAnimation();
     }
 
-    public void StartButtonClick(View view) throws InterruptedException {
+    public void StartButtonClick(View view){
         findViewById(R.id.startButton).setBackgroundColor(Color.BLACK);
         findViewById(R.id.greenButton).setBackgroundColor(Color.BLACK);
         findViewById(R.id.redButton).setBackgroundColor(Color.BLACK);
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
         setElement();
         findViewById(R.id.startButton).setEnabled(false);
         enableButtons(false);
-        blinkText();
+        animateButton();
+        animationCounter=0;
     }
 
     public void enableButtons(boolean set){
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.yellowButton).setEnabled(set);
     }
 
-    private void blinkText(){
+    private void animateButton(){
         final Handler handler = new Handler();
         new Thread(() -> {
             int timeToBlink = 250;    //in ms
@@ -52,43 +54,46 @@ public class MainActivity extends AppCompatActivity {
             }catch (Exception e) {
 
             }
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    if(animationCounter < values.size()) {
-                        if(!dark) {
-                            if (values.get(animationCounter) == 0) {
-                                buttonAnimation(Color.BLACK,Color.GREEN,findViewById(R.id.greenButton),timeToBlink);
-                            } else if(values.get(animationCounter) == 1) {
-                                buttonAnimation(Color.BLACK,Color.RED,findViewById(R.id.redButton),timeToBlink);
-                            }else if(values.get(animationCounter) == 2){
-                                buttonAnimation(Color.BLACK,Color.BLUE,findViewById(R.id.blueButton),timeToBlink);
-                            }else{
-                                buttonAnimation(Color.BLACK,Color.YELLOW,findViewById(R.id.yellowButton),timeToBlink);
-                            }
+            handler.post(() -> {
+                if(animationCounter<0){
+                    animationCounter++;
+                    animateButton();
+                    return;
+                }
 
-                            dark = true;
+                if(animationCounter < values.size()) {
+                    if(!dark) {
+                        if (values.get(animationCounter) == 0) {
+                            buttonAnimation(Color.BLACK,Color.GREEN,findViewById(R.id.greenButton),timeToBlink);
+                        } else if(values.get(animationCounter) == 1) {
+                            buttonAnimation(Color.BLACK,Color.RED,findViewById(R.id.redButton),timeToBlink);
+                        }else if(values.get(animationCounter) == 2){
+                            buttonAnimation(Color.BLACK,Color.BLUE,findViewById(R.id.blueButton),timeToBlink);
+                        }else{
+                            buttonAnimation(Color.BLACK,Color.YELLOW,findViewById(R.id.yellowButton),timeToBlink);
                         }
-                        else{
-                            if (values.get(animationCounter) == 0) {
-                                buttonAnimation(Color.GREEN,Color.BLACK,findViewById(R.id.greenButton),timeToBlink);
-                            } else if(values.get(animationCounter) == 1) {
-                                buttonAnimation(Color.RED,Color.BLACK,findViewById(R.id.redButton),timeToBlink);
-                            }else if(values.get(animationCounter) == 2){
-                                buttonAnimation(Color.BLUE,Color.BLACK,findViewById(R.id.blueButton),timeToBlink);
-                            }else{
-                                buttonAnimation(Color.YELLOW,Color.BLACK,findViewById(R.id.yellowButton),timeToBlink);
-                            }
 
-
-                            dark = false;
-                            animationCounter++;
-                        }
-                        blinkText();
-                    }else{
-                        enableButtons(true);
-                        resetColor();
+                        dark = true;
                     }
+                    else{
+                        if (values.get(animationCounter) == 0) {
+                            buttonAnimation(Color.GREEN,Color.BLACK,findViewById(R.id.greenButton),timeToBlink);
+                        } else if(values.get(animationCounter) == 1) {
+                            buttonAnimation(Color.RED,Color.BLACK,findViewById(R.id.redButton),timeToBlink);
+                        }else if(values.get(animationCounter) == 2){
+                            buttonAnimation(Color.BLUE,Color.BLACK,findViewById(R.id.blueButton),timeToBlink);
+                        }else{
+                            buttonAnimation(Color.YELLOW,Color.BLACK,findViewById(R.id.yellowButton),timeToBlink);
+                        }
+
+
+                        dark = false;
+                        animationCounter++;
+                    }
+                    animateButton();
+                }else{
+                    enableButtons(true);
+                    resetColor();
                 }
             });
         }).start();
@@ -109,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 resetAnimation();
                 setElement();
                 enableButtons(false);
-                blinkText();
+                animateButton();
             }
 
         }else{
@@ -126,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void resetAnimation(){
         clickCounter=0;
-        animationCounter=0;
+        animationCounter=-3;
     }
 
     public void buttonAnimation(int colorFrom,int colorTo, View view,int duration){

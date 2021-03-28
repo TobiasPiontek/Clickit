@@ -25,11 +25,11 @@
         android:layout_width="150dp"
         android:layout_height="300dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
         android:backgroundTint="@color/black"
+        android:enabled="false"
         android:onClick="redButtonOnClick"
         android:text="red"
-        android:enabled="false"
+        android:textColor="#FF0000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startButton" />
 
@@ -37,12 +37,12 @@
         android:id="@+id/greenButton"
         android:layout_width="150dp"
         android:layout_height="300dp"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/black"
+        android:enabled="false"
         android:onClick="greenButtonOnClick"
         android:text="Green"
-        android:enabled="false"
+        android:textColor="#8BC34A"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startButton" />
 
@@ -51,12 +51,11 @@
         android:id="@+id/blueButton"
         android:layout_width="150dp"
         android:layout_height="300dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
         android:backgroundTint="@color/black"
-        android:text="blue"
         android:enabled="false"
         android:onClick="blueButtonClick"
+        android:text="blue"
+        android:textColor="#2196F3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -64,15 +63,13 @@
         android:id="@+id/yellowButton"
         android:layout_width="150dp"
         android:layout_height="300dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
         android:backgroundTint="@color/black"
-        android:text="yellow"
         android:enabled="false"
         android:onClick="yellowButtonClick"
+        android:text="yellow"
+        android:textColor="#FFEB3B"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
