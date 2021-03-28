@@ -26,12 +26,11 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.startButton).setBackgroundColor(Color.BLACK);
         findViewById(R.id.greenButton).setBackgroundColor(Color.BLACK);
         findViewById(R.id.redButton).setBackgroundColor(Color.BLACK);
-        values.add((int)(Math.random()*4));
-        animationCounter = 0;
+        resetAnimation();
+        setElement();
         findViewById(R.id.startButton).setEnabled(false);
         enableButtons(false);
         blinkText();
-
     }
 
     public void enableButtons(boolean set){
@@ -81,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         blinkText();
                     }else{
-                        findViewById(R.id.startButton).setEnabled(true);
                         enableButtons(true);
                     }
                 }
@@ -96,29 +94,55 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.blueButton).setBackgroundColor(Color.BLACK);
         findViewById(R.id.yellowButton).setBackgroundColor(Color.BLACK);
     }
-    public boolean buttonPress(int buttonID){
-        
-        return true;
+
+    public void buttonPress(int buttonID){
+        if(values.get(clickCounter)==buttonID){
+            clickCounter++;
+            if(values.size()==clickCounter){
+                resetAnimation();
+                resetColor();
+                setElement();
+                blinkText();
+            }
+
+        }else{
+            resetAnimation();
+            values.clear();
+            findViewById(R.id.startButton).setEnabled(true);
+        }
     }
 
-    public void redButtonOnClick(View view) {
-        resetColor();
-        view.setBackgroundColor(Color.RED);
+    public void setElement(){
+        values.add((int)(Math.random()*4));
+    }
+
+    public void resetAnimation(){
+        clickCounter=0;
+        animationCounter=0;
     }
 
     public void greenButtonOnClick(View view) {
         resetColor();
         view.setBackgroundColor(Color.GREEN);
+        buttonPress(0);
     }
 
+    public void redButtonOnClick(View view) {
+        resetColor();
+        view.setBackgroundColor(Color.RED);
+        buttonPress(1);
+
+    }
 
     public void blueButtonClick(View view) {
         resetColor();
         view.setBackgroundColor(Color.BLUE);
+        buttonPress(2);
     }
 
     public void yellowButtonClick(View view) {
         resetColor();
         view.setBackgroundColor(Color.YELLOW);
+        buttonPress(3);
     }
 }
