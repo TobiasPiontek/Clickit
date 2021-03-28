@@ -16,6 +16,7 @@
         android:backgroundTint="@color/black"
         android:onClick="StartButtonClick"
         android:text="Start"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
