@@ -1,5 +1,6 @@
 package com.example.testapp;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ArgbEvaluator;
@@ -23,12 +24,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         resetAnimation();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+        findViewById(R.id.background).setBackgroundColor(Color.DKGRAY);
     }
 
     public void StartButtonClick(View view){
-        findViewById(R.id.startButton).setBackgroundColor(Color.BLACK);
-        findViewById(R.id.greenButton).setBackgroundColor(Color.BLACK);
-        findViewById(R.id.redButton).setBackgroundColor(Color.BLACK);
+        resetColor();
         resetAnimation();
         setElement();
         findViewById(R.id.startButton).setEnabled(false);
@@ -85,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                         }else{
                             buttonAnimation(Color.YELLOW,Color.BLACK,findViewById(R.id.yellowButton),timeToBlink);
                         }
-
 
                         dark = false;
                         animationCounter++;
