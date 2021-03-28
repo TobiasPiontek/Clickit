@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 resetAnimation();
                 resetColor();
                 setElement();
+                enableButtons(false);
                 blinkText();
             }
 
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
             resetAnimation();
             values.clear();
             findViewById(R.id.startButton).setEnabled(true);
+            enableButtons(false);
         }
     }
 

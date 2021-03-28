@@ -8,6 +8,19 @@
 
 
     <Button
+        android:id="@+id/startButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/black"
+        android:onClick="StartButtonClick"
+        android:text="Start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
         android:id="@+id/redButton"
         android:layout_width="150dp"
         android:layout_height="300dp"
@@ -16,6 +29,7 @@
         android:backgroundTint="@color/black"
         android:onClick="redButtonOnClick"
         android:text="red"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startButton" />
 
@@ -28,20 +42,10 @@
         android:backgroundTint="@color/black"
         android:onClick="greenButtonOnClick"
         android:text="Green"
+        android:enabled="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startButton" />
 
-    <Button
-        android:id="@+id/startButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="4dp"
-        android:backgroundTint="@color/black"
-        android:onClick="StartButtonClick"
-        android:text="Start"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/blueButton"
@@ -51,6 +55,7 @@
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/black"
         android:text="blue"
+        android:enabled="false"
         android:onClick="blueButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -63,9 +68,11 @@
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/black"
         android:text="yellow"
+        android:enabled="false"
         android:onClick="yellowButtonClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
