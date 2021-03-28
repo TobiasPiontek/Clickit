@@ -2,6 +2,7 @@ package com.example.testapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -39,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.blueButton).setEnabled(set);
         findViewById(R.id.yellowButton).setEnabled(set);
     }
-
-
 
     private void blinkText(){
         final Handler handler = new Handler();
@@ -81,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                         blinkText();
                     }else{
                         enableButtons(true);
+                        resetColor();
                     }
                 }
             });
@@ -100,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
             clickCounter++;
             if(values.size()==clickCounter){
                 resetAnimation();
-                resetColor();
                 setElement();
                 enableButtons(false);
                 blinkText();
@@ -123,28 +122,30 @@ public class MainActivity extends AppCompatActivity {
         animationCounter=0;
     }
 
+    public void buttonAnimation(int colorFrom, View view){
+        ObjectAnimator backgroundColor = ObjectAnimator.ofInt(view, "backgroundColor", colorFrom, Color.BLACK);
+        backgroundColor.setDuration(500);
+        backgroundColor.start();
+    }
+
     public void greenButtonOnClick(View view) {
-        resetColor();
-        view.setBackgroundColor(Color.GREEN);
+        buttonAnimation(Color.GREEN,view);
         buttonPress(0);
     }
 
     public void redButtonOnClick(View view) {
-        resetColor();
-        view.setBackgroundColor(Color.RED);
+        buttonAnimation(Color.RED,view);
         buttonPress(1);
 
     }
 
     public void blueButtonClick(View view) {
-        resetColor();
-        view.setBackgroundColor(Color.BLUE);
+        buttonAnimation(Color.BLUE,view);
         buttonPress(2);
     }
 
     public void yellowButtonClick(View view) {
-        resetColor();
-        view.setBackgroundColor(Color.YELLOW);
+        buttonAnimation(Color.YELLOW,view);
         buttonPress(3);
     }
 }
