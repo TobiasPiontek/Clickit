@@ -2,6 +2,7 @@ package com.example.testapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -57,23 +58,29 @@ public class MainActivity extends AppCompatActivity {
                     if(animationCounter < values.size()) {
                         if(!dark) {
                             if (values.get(animationCounter) == 0) {
-                                resetColor();
-                                findViewById(R.id.greenButton).setBackgroundColor(Color.GREEN);
+                                buttonAnimation(Color.BLACK,Color.GREEN,findViewById(R.id.greenButton),timeToBlink);
                             } else if(values.get(animationCounter) == 1) {
-                                resetColor();
-                                findViewById(R.id.redButton).setBackgroundColor(Color.RED);
+                                buttonAnimation(Color.BLACK,Color.RED,findViewById(R.id.redButton),timeToBlink);
                             }else if(values.get(animationCounter) == 2){
-                                resetColor();
-                                findViewById(R.id.blueButton).setBackgroundColor(Color.BLUE);
+                                buttonAnimation(Color.BLACK,Color.BLUE,findViewById(R.id.blueButton),timeToBlink);
                             }else{
-                                resetColor();
-                                findViewById(R.id.yellowButton).setBackgroundColor(Color.YELLOW);
+                                buttonAnimation(Color.BLACK,Color.YELLOW,findViewById(R.id.yellowButton),timeToBlink);
                             }
 
                             dark = true;
                         }
                         else{
-                            resetColor();
+                            if (values.get(animationCounter) == 0) {
+                                buttonAnimation(Color.GREEN,Color.BLACK,findViewById(R.id.greenButton),timeToBlink);
+                            } else if(values.get(animationCounter) == 1) {
+                                buttonAnimation(Color.RED,Color.BLACK,findViewById(R.id.redButton),timeToBlink);
+                            }else if(values.get(animationCounter) == 2){
+                                buttonAnimation(Color.BLUE,Color.BLACK,findViewById(R.id.blueButton),timeToBlink);
+                            }else{
+                                buttonAnimation(Color.YELLOW,Color.BLACK,findViewById(R.id.yellowButton),timeToBlink);
+                            }
+
+
                             dark = false;
                             animationCounter++;
                         }
@@ -122,30 +129,31 @@ public class MainActivity extends AppCompatActivity {
         animationCounter=0;
     }
 
-    public void buttonAnimation(int colorFrom, View view){
-        ObjectAnimator backgroundColor = ObjectAnimator.ofInt(view, "backgroundColor", colorFrom, Color.BLACK);
-        backgroundColor.setDuration(500);
+    public void buttonAnimation(int colorFrom,int colorTo, View view,int duration){
+        ObjectAnimator backgroundColor = ObjectAnimator.ofInt(view, "backgroundColor", colorFrom, colorTo);
+        backgroundColor.setDuration(duration);
+        backgroundColor.setEvaluator(new ArgbEvaluator());
         backgroundColor.start();
     }
 
     public void greenButtonOnClick(View view) {
-        buttonAnimation(Color.GREEN,view);
+        buttonAnimation(Color.GREEN,Color.BLACK,view,500);
         buttonPress(0);
     }
 
     public void redButtonOnClick(View view) {
-        buttonAnimation(Color.RED,view);
+        buttonAnimation(Color.RED,Color.BLACK,view,500);
         buttonPress(1);
 
     }
 
     public void blueButtonClick(View view) {
-        buttonAnimation(Color.BLUE,view);
+        buttonAnimation(Color.BLUE,Color.BLACK,view,500);
         buttonPress(2);
     }
 
     public void yellowButtonClick(View view) {
-        buttonAnimation(Color.YELLOW,view);
+        buttonAnimation(Color.YELLOW,Color.BLACK,view,500);
         buttonPress(3);
     }
 }
