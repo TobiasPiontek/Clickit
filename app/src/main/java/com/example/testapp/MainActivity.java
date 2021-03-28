@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.startButton).setEnabled(false);
         enableButtons(false);
         animateButton();
-        animationCounter=0;
+        animationCounter=-3;
     }
 
     public void enableButtons(boolean set){
