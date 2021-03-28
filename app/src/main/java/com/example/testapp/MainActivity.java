@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.os.Handler;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
-    static int[] values;
-    static int blinkLength = 10;
-    static int counter=0;
-    static boolean dark = true;
+    static ArrayList<Integer> values = new ArrayList<>();
+    static int animationCounter =0;
+    static int clickCounter = 0;
+    static boolean dark = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +26,20 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.startButton).setBackgroundColor(Color.BLACK);
         findViewById(R.id.greenButton).setBackgroundColor(Color.BLACK);
         findViewById(R.id.redButton).setBackgroundColor(Color.BLACK);
-        values = new int[blinkLength + 1];
-        for (int i = 0; i < blinkLength; i++) {
-            values[i]=(int)(Math.random()*4);
-        }
-        counter = 0;
+        values.add((int)(Math.random()*4));
+        animationCounter = 0;
+        findViewById(R.id.startButton).setEnabled(false);
+        enableButtons(false);
         blinkText();
+
     }
 
+    public void enableButtons(boolean set){
+        findViewById(R.id.redButton).setEnabled(set);
+        findViewById(R.id.greenButton).setEnabled(set);
+        findViewById(R.id.blueButton).setEnabled(set);
+        findViewById(R.id.yellowButton).setEnabled(set);
+    }
 
 
 
@@ -48,15 +56,15 @@ public class MainActivity extends AppCompatActivity {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if(counter< blinkLength) {
+                    if(animationCounter < values.size()) {
                         if(!dark) {
-                            if (values[counter] == 0) {
+                            if (values.get(animationCounter) == 0) {
                                 resetColor();
                                 findViewById(R.id.greenButton).setBackgroundColor(Color.GREEN);
-                            } else if(values[counter] == 1) {
+                            } else if(values.get(animationCounter) == 1) {
                                 resetColor();
                                 findViewById(R.id.redButton).setBackgroundColor(Color.RED);
-                            }else if(values[counter] == 2){
+                            }else if(values.get(animationCounter) == 2){
                                 resetColor();
                                 findViewById(R.id.blueButton).setBackgroundColor(Color.BLUE);
                             }else{
@@ -69,10 +77,12 @@ public class MainActivity extends AppCompatActivity {
                         else{
                             resetColor();
                             dark = false;
-                            counter++;
+                            animationCounter++;
                         }
-
                         blinkText();
+                    }else{
+                        findViewById(R.id.startButton).setEnabled(true);
+                        enableButtons(true);
                     }
                 }
             });
@@ -85,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.greenButton).setBackgroundColor(Color.BLACK);
         findViewById(R.id.blueButton).setBackgroundColor(Color.BLACK);
         findViewById(R.id.yellowButton).setBackgroundColor(Color.BLACK);
+    }
+    public boolean buttonPress(int buttonID){
+        
+        return true;
     }
 
     public void redButtonOnClick(View view) {
