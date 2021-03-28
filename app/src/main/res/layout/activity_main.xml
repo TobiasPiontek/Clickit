@@ -11,66 +11,82 @@
         android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="5dp"
         android:backgroundTint="@color/black"
         android:onClick="StartButtonClick"
         android:text="Start"
         android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <Button
         android:id="@+id/redButton"
-        android:layout_width="150dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="1dp"
         android:backgroundTint="@color/black"
         android:enabled="false"
         android:onClick="redButtonOnClick"
         android:text="red"
         android:textColor="#FF0000"
+        app:layout_constraintBottom_toTopOf="@+id/yellowButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/greenButton"
         app:layout_constraintTop_toBottomOf="@+id/startButton" />
 
     <Button
         android:id="@+id/greenButton"
-        android:layout_width="150dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
         android:backgroundTint="@color/black"
         android:enabled="false"
         android:onClick="greenButtonOnClick"
         android:text="Green"
         android:textColor="#8BC34A"
+        app:layout_constraintBottom_toTopOf="@+id/blueButton"
+        app:layout_constraintEnd_toStartOf="@+id/redButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startButton" />
 
 
     <Button
         android:id="@+id/blueButton"
-        android:layout_width="150dp"
-        android:layout_height="300dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="5dp"
         android:backgroundTint="@color/black"
         android:enabled="false"
         android:onClick="blueButtonClick"
         android:text="blue"
         android:textColor="#2196F3"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/yellowButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/greenButton" />
 
     <Button
         android:id="@+id/yellowButton"
-        android:layout_width="150dp"
-        android:layout_height="300dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="1dp"
         android:backgroundTint="@color/black"
         android:enabled="false"
         android:onClick="yellowButtonClick"
         android:text="yellow"
         android:textColor="#FFEB3B"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/blueButton"
+        app:layout_constraintTop_toBottomOf="@+id/redButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
