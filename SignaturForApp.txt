@@ -1,0 +1,7 @@
+https://stackoverflow.com/questions/42021096/how-to-sign-automatically-when-i-click-run-button-in-android-studio
+
+file: my-release-key.keystore
+signatur config:
+store password: test123
+key alias: alias_name
+passwort: test123
