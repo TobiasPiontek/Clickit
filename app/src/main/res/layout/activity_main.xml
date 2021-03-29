@@ -90,5 +90,15 @@
         app:layout_constraintStart_toEndOf="@+id/blueButton"
         app:layout_constraintTop_toBottomOf="@+id/redButton" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HI:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/startButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/startButton" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

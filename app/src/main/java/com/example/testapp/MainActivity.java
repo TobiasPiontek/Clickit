@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.os.Handler;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
     static int animationCounter;
     static int clickCounter;
     static boolean dark = false;
+    int timeToBlink;
+    int highscore = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +37,12 @@ public class MainActivity extends AppCompatActivity {
         resetColor();
         resetAnimation();
         setElement();
+        timeToBlink = 250;
         findViewById(R.id.startButton).setEnabled(false);
         enableButtons(false);
-        animateButton();
-        animationCounter=-3;
+        drawButtonPattern();
+        resetAnimation();
+
     }
 
     public void enableButtons(boolean set){
@@ -46,10 +52,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.yellowButton).setEnabled(set);
     }
 
-    private void animateButton(){
+    private void drawButtonPattern(){
         final Handler handler = new Handler();
         new Thread(() -> {
-            int timeToBlink = 250;    //in ms
             try{
                 Thread.sleep(timeToBlink);
 
@@ -59,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             handler.post(() -> {
                 if(animationCounter<0){
                     animationCounter++;
-                    animateButton();
+                    drawButtonPattern();
                     return;
                 }
 
@@ -91,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                         dark = false;
                         animationCounter++;
                     }
-                    animateButton();
+                    drawButtonPattern();
                 }else{
                     enableButtons(true);
                     resetColor();
@@ -112,13 +117,21 @@ public class MainActivity extends AppCompatActivity {
         if(values.get(clickCounter)==buttonID){
             clickCounter++;
             if(values.size()==clickCounter){
+                buttonAnimation(Color.GREEN,Color.DKGRAY,findViewById(R.id.background),timeToBlink*2);
+                timeToBlink=(int)((double)timeToBlink*0.95);
+               // if(highscore < clickCounter){
+               //     highscore = clickCounter;
+               //     ((TextView) findViewById(R.id.highscorenumber)).setText(highscore);
+                //
+                //}
                 resetAnimation();
                 setElement();
                 enableButtons(false);
-                animateButton();
+                drawButtonPattern();
             }
 
         }else{
+            buttonAnimation(Color.RED,Color.DKGRAY,findViewById(R.id.background),timeToBlink*4);
             resetAnimation();
             values.clear();
             findViewById(R.id.startButton).setEnabled(true);
@@ -132,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void resetAnimation(){
         clickCounter=0;
-        animationCounter=-3;
+        animationCounter=-4;
     }
 
     public void buttonAnimation(int colorFrom,int colorTo, View view,int duration){
