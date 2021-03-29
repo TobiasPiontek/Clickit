@@ -5,11 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.os.Handler;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -19,9 +24,17 @@ public class MainActivity extends AppCompatActivity {
     static int animationCounter;
     static int clickCounter;
     static boolean dark = false;
-    int timeToBlink;
-    int highscore = 0;
+    static int timeToBlink;
+    static int highscore = 0;
+    /*
+    SharedPreferences mPrefs = getSharedPreferences("label", 0);
+    String mString = mPrefs.getString("tag", "default_value_if_variable_not_found");
+    SharedPreferences.Editor mEditor = mPrefs.edit();
+    mEditor.putString("tag", value_of_variable).commit();
+    */
 
+    static SharedPreferences sp;
+    static SharedPreferences.Editor edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         findViewById(R.id.background).setBackgroundColor(Color.DKGRAY);
+        sp = getSharedPreferences("FILE_NAME", MODE_PRIVATE);
+        edit = sp.edit();
+        try{
+        SharedPreferences sp = getSharedPreferences("FILE_NAME", MODE_PRIVATE);
+        highscore = sp.getInt("highscore", 0);
+        ((TextView)(findViewById(R.id.highscore))).setText(Integer.toString(highscore));
+        }catch(Exception e){
+
+        }
     }
 
     public void StartButtonClick(View view){
@@ -123,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
                 if(highscore < clickCounter){
                     highscore = clickCounter;
                     ((TextView) findViewById(R.id.highscore)).setText(Integer.toString(highscore));
+                    edit.putInt("highscore",highscore);
+                    edit.apply();
 
                 }
                 ((TextView) findViewById(R.id.level)).setText(Integer.toString(clickCounter));
