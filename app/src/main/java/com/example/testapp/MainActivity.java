@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         resetAnimation();
         setElement();
         timeToBlink = 250;
+        ((TextView) findViewById(R.id.level)).setText(Integer.toString(0));
         findViewById(R.id.startButton).setEnabled(false);
         enableButtons(false);
         drawButtonPattern();
@@ -119,11 +120,12 @@ public class MainActivity extends AppCompatActivity {
             if(values.size()==clickCounter){
                 buttonAnimation(Color.GREEN,Color.DKGRAY,findViewById(R.id.background),timeToBlink*2);
                 timeToBlink=(int)((double)timeToBlink*0.95);
-               // if(highscore < clickCounter){
-               //     highscore = clickCounter;
-               //     ((TextView) findViewById(R.id.highscorenumber)).setText(highscore);
-                //
-                //}
+                if(highscore < clickCounter){
+                    highscore = clickCounter;
+                    ((TextView) findViewById(R.id.highscore)).setText(Integer.toString(highscore));
+
+                }
+                ((TextView) findViewById(R.id.level)).setText(Integer.toString(clickCounter));
                 resetAnimation();
                 setElement();
                 enableButtons(false);

@@ -94,11 +94,45 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
         android:text="HI:"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/startButton"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/highscore"
+        app:layout_constraintTop_toTopOf="@+id/startButton"
+        app:layout_constraintVertical_bias="0.687" />
+
+    <TextView
+        android:id="@+id/highscore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="0"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/startButton"
+        app:layout_constraintEnd_toStartOf="@+id/startButton"
         app:layout_constraintTop_toTopOf="@+id/startButton" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="LVL:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/startButton"
+        app:layout_constraintStart_toEndOf="@+id/startButton"
+        app:layout_constraintTop_toTopOf="@+id/startButton" />
+
+    <TextView
+        android:id="@+id/level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="0"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/startButton"
+        app:layout_constraintStart_toEndOf="@+id/textView3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
