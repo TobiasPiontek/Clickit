@@ -5,17 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.os.Handler;
 import android.widget.TextView;
+import android.media.MediaPlayer;
 
-import org.w3c.dom.Text;
-
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -25,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     static int clickCounter;
     static boolean dark = false;
     static int timeToBlink;
-    static int highscore = 0;
+    static int highScore = 0;
     /*
     SharedPreferences mPrefs = getSharedPreferences("label", 0);
     String mString = mPrefs.getString("tag", "default_value_if_variable_not_found");
@@ -46,10 +44,11 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.background).setBackgroundColor(Color.DKGRAY);
         sp = getSharedPreferences("FILE_NAME", MODE_PRIVATE);
         edit = sp.edit();
+        //Try to load the savefile for the highscore
         try{
         SharedPreferences sp = getSharedPreferences("FILE_NAME", MODE_PRIVATE);
-        highscore = sp.getInt("highscore", 0);
-        ((TextView)(findViewById(R.id.highscore))).setText(Integer.toString(highscore));
+        highScore = sp.getInt("highscore", 0);
+        ((TextView)(findViewById(R.id.highscore))).setText(Integer.toString(highScore));
         }catch(Exception e){
 
         }
@@ -65,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         enableButtons(false);
         drawButtonPattern();
         resetAnimation();
-
     }
 
     public void enableButtons(boolean set){
@@ -137,15 +135,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonPress(int buttonID){
+        MediaPlayer player = MediaPlayer.create(MainActivity.this,R.raw.soundone);
+        player.start();
+
         if(values.get(clickCounter)==buttonID){
             clickCounter++;
             if(values.size()==clickCounter){
                 buttonAnimation(Color.GREEN,Color.DKGRAY,findViewById(R.id.background),timeToBlink*2);
                 timeToBlink=(int)((double)timeToBlink*0.95);
-                if(highscore < clickCounter){
-                    highscore = clickCounter;
-                    ((TextView) findViewById(R.id.highscore)).setText(Integer.toString(highscore));
-                    edit.putInt("highscore",highscore);
+                if(highScore < clickCounter){
+                    highScore = clickCounter;
+                    ((TextView) findViewById(R.id.highscore)).setText(Integer.toString(highScore));
+                    edit.putInt("highscore", highScore);
                     edit.apply();
 
                 }
