@@ -8,12 +8,12 @@ import android.animation.ObjectAnimator;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.os.Handler;
 import android.widget.TextView;
 import android.media.MediaPlayer;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -92,26 +92,26 @@ public class MainActivity extends AppCompatActivity {
                 if(animationCounter < values.size()) {
                     if(!dark) {
                         if (values.get(animationCounter) == 0) {
-                            buttonAnimation(Color.BLACK,Color.GREEN,findViewById(R.id.greenButton),timeToBlink);
+                            buttonAnimation(Color.BLACK,Color.GREEN,findViewById(R.id.greenButton),timeToBlink,0);
                         } else if(values.get(animationCounter) == 1) {
-                            buttonAnimation(Color.BLACK,Color.RED,findViewById(R.id.redButton),timeToBlink);
+                            buttonAnimation(Color.BLACK,Color.RED,findViewById(R.id.redButton),timeToBlink,1);
                         }else if(values.get(animationCounter) == 2){
-                            buttonAnimation(Color.BLACK,Color.BLUE,findViewById(R.id.blueButton),timeToBlink);
+                            buttonAnimation(Color.BLACK,Color.BLUE,findViewById(R.id.blueButton),timeToBlink,2);
                         }else{
-                            buttonAnimation(Color.BLACK,Color.YELLOW,findViewById(R.id.yellowButton),timeToBlink);
+                            buttonAnimation(Color.BLACK,Color.YELLOW,findViewById(R.id.yellowButton),timeToBlink,3);
                         }
 
                         dark = true;
                     }
                     else{
                         if (values.get(animationCounter) == 0) {
-                            buttonAnimation(Color.GREEN,Color.BLACK,findViewById(R.id.greenButton),timeToBlink);
+                            buttonAnimation(Color.GREEN,Color.BLACK,findViewById(R.id.greenButton),timeToBlink,-1);
                         } else if(values.get(animationCounter) == 1) {
-                            buttonAnimation(Color.RED,Color.BLACK,findViewById(R.id.redButton),timeToBlink);
+                            buttonAnimation(Color.RED,Color.BLACK,findViewById(R.id.redButton),timeToBlink,-1);
                         }else if(values.get(animationCounter) == 2){
-                            buttonAnimation(Color.BLUE,Color.BLACK,findViewById(R.id.blueButton),timeToBlink);
+                            buttonAnimation(Color.BLUE,Color.BLACK,findViewById(R.id.blueButton),timeToBlink,-1);
                         }else{
-                            buttonAnimation(Color.YELLOW,Color.BLACK,findViewById(R.id.yellowButton),timeToBlink);
+                            buttonAnimation(Color.YELLOW,Color.BLACK,findViewById(R.id.yellowButton),timeToBlink,-1);
                         }
 
                         dark = false;
@@ -135,13 +135,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonPress(int buttonID){
-        MediaPlayer player = MediaPlayer.create(MainActivity.this,R.raw.soundone);
-        player.start();
+
 
         if(values.get(clickCounter)==buttonID){
             clickCounter++;
             if(values.size()==clickCounter){
-                buttonAnimation(Color.GREEN,Color.DKGRAY,findViewById(R.id.background),timeToBlink*2);
+                buttonAnimation(Color.GREEN,Color.DKGRAY,findViewById(R.id.background),timeToBlink*2,-1);
                 timeToBlink=(int)((double)timeToBlink*0.95);
                 if(highScore < clickCounter){
                     highScore = clickCounter;
@@ -158,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }else{
-            buttonAnimation(Color.RED,Color.DKGRAY,findViewById(R.id.background),timeToBlink*4);
+            buttonAnimation(Color.RED,Color.DKGRAY,findViewById(R.id.background),timeToBlink*4,-1);
             resetAnimation();
             values.clear();
             findViewById(R.id.startButton).setEnabled(true);
@@ -175,31 +174,60 @@ public class MainActivity extends AppCompatActivity {
         animationCounter=-4;
     }
 
-    public void buttonAnimation(int colorFrom,int colorTo, View view,int duration){
+    public void buttonAnimation(int colorFrom,int colorTo, View view,int duration, int sound){
         ObjectAnimator backgroundColor = ObjectAnimator.ofInt(view, "backgroundColor", colorFrom, colorTo);
         backgroundColor.setDuration(duration);
         backgroundColor.setEvaluator(new ArgbEvaluator());
+        playSound(sound);
         backgroundColor.start();
     }
 
+    public void playSound(int sound){
+        MediaPlayer soundOne = MediaPlayer.create(MainActivity.this,R.raw.soundone);
+        MediaPlayer soundTwo = MediaPlayer.create(MainActivity.this,R.raw.soundtwo);
+        MediaPlayer soundThree = MediaPlayer.create(MainActivity.this,R.raw.soundthree);
+        MediaPlayer soundFour = MediaPlayer.create(MainActivity.this,R.raw.soundfour);
+
+        switch(sound){
+            case 0:
+                soundOne.start();
+                break;
+
+            case 1:
+                soundTwo.start();
+                break;
+
+            case 2:
+                soundThree.start();
+                break;
+
+            case 3:
+                soundFour.start();
+                break;
+
+            default:
+                break;
+        }
+
+    }
+
     public void greenButtonOnClick(View view) {
-        buttonAnimation(Color.GREEN,Color.BLACK,view,500);
+        buttonAnimation(Color.GREEN,Color.BLACK,view,500,0);
         buttonPress(0);
     }
 
     public void redButtonOnClick(View view) {
-        buttonAnimation(Color.RED,Color.BLACK,view,500);
+        buttonAnimation(Color.RED,Color.BLACK,view,500,1);
         buttonPress(1);
-
     }
 
     public void blueButtonClick(View view) {
-        buttonAnimation(Color.BLUE,Color.BLACK,view,500);
+        buttonAnimation(Color.BLUE,Color.BLACK,view,500,2);
         buttonPress(2);
     }
 
     public void yellowButtonClick(View view) {
-        buttonAnimation(Color.YELLOW,Color.BLACK,view,500);
+        buttonAnimation(Color.YELLOW,Color.BLACK,view,500,3);
         buttonPress(3);
     }
 }
