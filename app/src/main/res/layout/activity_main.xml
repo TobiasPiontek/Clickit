@@ -11,17 +11,16 @@
 
     <Button
         android:id="@+id/startButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_width="92dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
         android:backgroundTint="@color/black"
         android:onClick="StartButtonClick"
         android:text="Start"
         android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintEnd_toStartOf="@+id/textView3"
+        app:layout_constraintStart_toEndOf="@+id/highscore"
+        app:layout_constraintTop_toTopOf="@+id/highscore" />
 
     <Button
         android:id="@+id/redButton"
@@ -35,6 +34,7 @@
         android:onClick="redButtonOnClick"
         android:text="red"
         android:textColor="#FF0000"
+        android:textSize="28sp"
         app:layout_constraintBottom_toTopOf="@+id/yellowButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/greenButton"
@@ -51,7 +51,8 @@
         android:enabled="false"
         android:onClick="greenButtonOnClick"
         android:text="Green"
-        android:textColor="#8BC34A"
+        android:textColor="#00FF00"
+        android:textSize="28sp"
         app:layout_constraintBottom_toTopOf="@+id/blueButton"
         app:layout_constraintEnd_toStartOf="@+id/redButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +69,8 @@
         android:enabled="false"
         android:onClick="blueButtonClick"
         android:text="blue"
-        android:textColor="#2196F3"
+        android:textColor="#0000FF"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/yellowButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +86,8 @@
         android:enabled="false"
         android:onClick="yellowButtonClick"
         android:text="yellow"
-        android:textColor="#FFEB3B"
+        android:textColor="#FFFF00"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/blueButton"
@@ -94,45 +97,49 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
         android:text="HI:"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/startButton"
-        app:layout_constraintEnd_toStartOf="@+id/highscore"
-        app:layout_constraintTop_toTopOf="@+id/startButton"
-        app:layout_constraintVertical_bias="0.687" />
+        app:layout_constraintStart_toEndOf="@+id/soundSwitch"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/highscore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
         android:text="0"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/startButton"
-        app:layout_constraintEnd_toStartOf="@+id/startButton"
-        app:layout_constraintTop_toTopOf="@+id/startButton" />
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
         android:text="LVL:"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/startButton"
-        app:layout_constraintStart_toEndOf="@+id/startButton"
+        app:layout_constraintEnd_toStartOf="@+id/level"
         app:layout_constraintTop_toTopOf="@+id/startButton" />
 
     <TextView
         android:id="@+id/level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         android:text="0"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/startButton"
-        app:layout_constraintStart_toEndOf="@+id/textView3" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+    <Switch
+        android:id="@+id/soundSwitch"
+        android:layout_width="88dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:onClick="soundOnClick"
+        android:text="🔊"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
