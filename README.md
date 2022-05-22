@@ -1,5 +1,7 @@
-# TestApp
-This is a simply testapp i made for myself to get started with some simple android app development.
+![App Icon should be displayed here](./app/src/main/ic_launcher-playstore.png)
+
+# Click it Hard!
+This is a simple game i made for myself to get started with some simple android app development.
 
 The goal of the game is to remember the displayed pattern and repeat it.
 
