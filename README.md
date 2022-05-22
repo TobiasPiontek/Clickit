@@ -1,5 +1,9 @@
 # TestApp
 This is a simply testapp i made for myself to get started with some simple android app development.
 
-How to export he app as installable apk:
-https://stackoverflow.com/questions/16622843/how-do-i-export-a-project-in-the-android-studio 
+The goal of the game is to remember the displayed pattern and repeat it.
+
+
+## Known issues:
+
+Game is laggy, when the differnt sounds of the buttons are disabled (deactivation of sounds fixes this)
